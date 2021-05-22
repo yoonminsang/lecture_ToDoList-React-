@@ -5,13 +5,24 @@ import Inner from './components/Inner';
 import React, { useEffect, useState } from 'react';
 
 const App = () => {
-  let [date, setDate] = useState(getDate());
+  const [date, setDate] = useState(getDate());
+  const [toDos, setToDos] = useState([]);
   useEffect(() => {
     setInterval(() => setDate(getDate()), 1000);
     return () => {
       clearInterval();
     };
   }, []);
+  const addToDo = (value) => {
+    const newToDo = {
+      id: Date.now(),
+      value,
+      date,
+      done: false,
+      check: false,
+    };
+    setToDos([...toDos, newToDo]);
+  };
   function getDate() {
     const date = new Date();
     const year = date.getFullYear();
@@ -27,7 +38,7 @@ const App = () => {
   return (
     <Template>
       <Header date={date} />
-      <Inner />
+      <Inner toDos={toDos} addToDo={addToDo} />
     </Template>
   );
 };
