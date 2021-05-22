@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
-import Inner_ToDoList from './Inner_ToDoList';
+import InnerToDoList from './InnerToDoList';
 
-const Inner = ({ toDos, addToDo }) => {
+const Inner = ({
+  toDos,
+  addToDo,
+  deleteToDo,
+  checkChange,
+  multiDeleteToDo,
+  doneChange,
+}) => {
   const [input, setInput] = useState('');
   const inputChange = (e) => {
     setInput(e.target.value);
@@ -27,12 +34,19 @@ const Inner = ({ toDos, addToDo }) => {
             className="toDo_multi_delete btn"
             type="button"
             value="delete"
+            onClick={multiDeleteToDo}
           />
         </form>
       </div>
       <div className="toDo_list">
         {toDos.map((toDo) => (
-          <Inner_ToDoList key={toDo.id} toDo={toDo} />
+          <InnerToDoList
+            key={toDo.id}
+            toDo={toDo}
+            deleteToDo={deleteToDo}
+            checkChange={checkChange}
+            doneChange={doneChange}
+          />
         ))}
       </div>
     </div>

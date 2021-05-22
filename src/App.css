@@ -82,3 +82,6 @@ input[type='checkbox'] {
   border: 0;
   margin-left: 3px;
 }
+.done {
+  text-decoration: line-through;
+}

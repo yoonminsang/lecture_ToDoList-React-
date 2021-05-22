@@ -23,6 +23,27 @@ const App = () => {
     };
     setToDos([...toDos, newToDo]);
   };
+  const deleteToDo = (id) => {
+    setToDos(toDos.filter((toDo) => toDo.id !== id));
+  };
+  const multiDeleteToDo = () => {
+    setToDos(toDos.filter((toDo) => toDo.check === false));
+  };
+  const checkChange = (id) => {
+    setToDos(
+      toDos.map((toDo) =>
+        id === toDo.id ? { ...toDo, check: !toDo.check } : toDo
+      )
+    );
+  };
+  const doneChange = (e, id) => {
+    if (e.target.nodeName !== 'DIV') return;
+    setToDos(
+      toDos.map((toDo) =>
+        id === toDo.id ? { ...toDo, done: !toDo.done } : toDo
+      )
+    );
+  };
   function getDate() {
     const date = new Date();
     const year = date.getFullYear();
@@ -38,7 +59,14 @@ const App = () => {
   return (
     <Template>
       <Header date={date} />
-      <Inner toDos={toDos} addToDo={addToDo} />
+      <Inner
+        toDos={toDos}
+        addToDo={addToDo}
+        deleteToDo={deleteToDo}
+        checkChange={checkChange}
+        multiDeleteToDo={multiDeleteToDo}
+        doneChange={doneChange}
+      />
     </Template>
   );
 };
