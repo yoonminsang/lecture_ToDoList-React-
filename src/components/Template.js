@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Template = ({ children }) => {
-  return <div className="contnet">{children}</div>;
+  return <div className="content">{children}</div>;
 };
 
 export default Template;
